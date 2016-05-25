@@ -1,9 +1,12 @@
+/*FORM DIV INCLUDES ALL DIVS (DAYS OF WEEK AND SUBMIT COLOR BUTTON)*/
 form div {
   background: #feed99;
   width: 400px;
   margin-bottom: 10px;
 }
 
+/*SUBMIT COLOR BUTTON DIV HAS SPECIAL SETTINGS*/
 form div:last-child {
   text-align: center;
+  background:grey;
 }
