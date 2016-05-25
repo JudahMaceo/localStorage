@@ -22,7 +22,10 @@ window.onload = function(){
 
   function setColors(){
     // set the background color to todays color
+body.style.background = "red";
   }
+
+setColors();
 
   function getDayColorsFromLocalStorage(){
     // check if window.localStorage.colorData is not undefined
