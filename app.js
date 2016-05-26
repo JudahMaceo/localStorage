@@ -3,24 +3,28 @@
 window.onload = function(){
 
 // SUBMIT BUTTON IS LAST CHILD OF THE FORM DIV
-  var submitButton = document.querySelector('form div:last-child input');
+  // var submitButton = document.querySelector('form div:last-child input');
+  var submitButton = document.querySelector('#colorButton');
+console.log(submitButton);
+// O: what does the submitButton variable look like onload?
 
 // INPUT REFERS TO DIV BOXES FOR EACH DAY OF WEEK
   var inputColors = document.querySelectorAll('input');
+  console.log(inputColors);
+// O: onload what does the inputColors variable look like? I'm assuming an array?
 
 //BODY REFERS TO BODY OF DOCUMENT
   var body = document.querySelector('body');
 
-  // returns day of the week, with 0 being Sunday, 1 being Monday, 2 being Tuesday, etc
-//HOW DOES THIS WORK???
-  //WHERE IS NEW DATE FUNCTION?
-    //WHERE IS DATE OBJECT?
-      //WHERE IS NOW FUNCTION?
-        //WHERE IS GET DAY FUNCTION?
-          //WHERE IS CURRENT DATE OBJECT?
+
+//CURRENT DATE TAKES THE VALUE OF THE NEW DATE OBJECT (WHICH CONTAINS THE DATE NOW)
   var currentdate = new Date(Date.now())
+  console.log(currentdate);
+//GET DAY RETURNS THE DAY OF THE WEEK (0 FOR SUNDAY, 1 FOR MONDAY ETC.)
   var today = currentdate.getDay()
-  document.querySelector('#today').innerText = currentdate;
+  console.log(today);
+//IF YOU QUERY SELECTOR AN ELEMENT WITHOUT AN ID THE VALUE RETURNED IS NULL
+  // document.querySelector('#today').innerText = currentdate;
 
   var dayColors = {};
 
@@ -28,17 +32,19 @@ window.onload = function(){
 
   submitButton.addEventListener("click", function(event){
     event.preventDefault();
-    updateDayColors();
+    // alert("clicked on submit");
+    // updateDayColors();
     setColors();
-    addToLocalStorage();
+    // addToLocalStorage();
+    return(false);
   })
 
   function setColors(){
     // set the background color to todays color
-body.style.background = "red";
+  // alert("called set colors function");
+document.body.style.background = "red";
   }
 
-setColors();
 
   function getDayColorsFromLocalStorage(){
     // check if window.localStorage.colorData is not undefined
