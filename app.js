@@ -1,66 +1,87 @@
-//BECAUSE JS TAG COMES BEFORE CSS TAG IN HTML?
-  //IS THIS NECESSARY OTHERWISE?
-window.onload = function(){
+window.onload = function() {
 
-// SUBMIT BUTTON IS LAST CHILD OF THE FORM DIV
-  // var submitButton = document.querySelector('form div:last-child input');
-  var submitButton = document.querySelector('#colorButton');
-console.log(submitButton);
-// O: what does the submitButton variable look like onload?
+    // var submitButton = document.querySelector('form div:last-child input');
+    var submitButton = document.querySelector('#colorButton');
+    // console.log(submitButton);
+    // O: what does the submitButton variable look like onload?
 
-// INPUT REFERS TO DIV BOXES FOR EACH DAY OF WEEK
-  var inputColors = document.querySelectorAll('input');
-  console.log(inputColors);
-// O: onload what does the inputColors variable look like? I'm assuming an array?
+    //ALL INPUT TYPE = COLOR DIVS
+    var inputColors = document.querySelectorAll('input');
 
-//BODY REFERS TO BODY OF DOCUMENT
-  var body = document.querySelector('body');
+    // console logging array of input colors with ids and values for visual learning purposes
+    var newArray = [];
+    for (var i = 0; i < inputColors.length - 1; i++) {
+        newArray.push(inputColors[i].id + ": " + inputColors[i].defaultValue);
+    }
+    console.log(newArray);
 
+    var body = document.querySelector('body');
 
-//CURRENT DATE TAKES THE VALUE OF THE NEW DATE OBJECT (WHICH CONTAINS THE DATE NOW)
-  var currentdate = new Date(Date.now())
-  console.log(currentdate);
-//GET DAY RETURNS THE DAY OF THE WEEK (0 FOR SUNDAY, 1 FOR MONDAY ETC.)
-  var today = currentdate.getDay()
-  console.log(today);
-//IF YOU QUERY SELECTOR AN ELEMENT WITHOUT AN ID THE VALUE RETURNED IS NULL
-  // document.querySelector('#today').innerText = currentdate;
+    var currentdate = new Date(Date.now())
+    console.log(currentdate);
 
-  var dayColors = {};
-
-  getDayColorsFromLocalStorage()
-
-  submitButton.addEventListener("click", function(event){
-    event.preventDefault();
-    // alert("clicked on submit");
-    // updateDayColors();
-    setColors();
-    // addToLocalStorage();
-    return(false);
-  })
-
-  function setColors(){
-    // set the background color to todays color
-  // alert("called set colors function");
-document.body.style.background = "red";
-  }
+    var today = currentdate.getDay()
+    console.log("today is a thursday: " + today);
+    //IF YOU QUERY SELECTOR AN ELEMENT WITHOUT AN ID THE VALUE RETURNED IS NULL
+    // document.querySelector('#today').innerText = currentdate;
 
 
-  function getDayColorsFromLocalStorage(){
-    // check if window.localStorage.colorData is not undefined
-    // JSON.parse the colorData
-    // Updated the background color to todays color using the today as the key
-  }
 
-  function updateDayColors(){
-    // loop through the input boxes that are type color
-    // Get their values and ids
-    // Add it to the dayColors object where the key is the id of each input i.e. monday's input id="1"
-  }
 
-  function addToLocalStorage(){
-    // stringify the dayColors object
-    // save it to localStorage as window.localStorage.colorData
-  }
+    var dayColors = {};
+
+    getDayColorsFromLocalStorage()
+
+    submitButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        // alert("clicked on submit");
+        updateDayColors();
+        setBackgroundColor();
+        addToLocalStorage();
+        return (false);
+    })
+
+    function setBackgroundColor() {
+        // set the background color to todays color
+        // alert("called set colors function");
+        var todaysColor = [];
+
+        for (key in dayColors) {
+            if (key === today.toString()) {
+                todaysColor.push(dayColors[key])
+            }
+
+        }
+        console.log(todaysColor[0]);
+document.body.style.background = todaysColor[0];
+    }
+
+
+    function getDayColorsFromLocalStorage() {
+        // check if window.localStorage.colorData is not undefined
+        // JSON.parse the colorData
+        // Updated the background color to todays color using the today as the key
+    }
+
+    function updateDayColors() {
+
+        // loop through the input boxes that are type color
+        // Get their values and ids
+        // Add it to the dayColors object where the key is the id of each input i.e. monday's input id="1"
+        for (var i = 0; i < inputColors.length - 1; i++) {
+            var colorInputId = inputColors[i].id
+            var newColorValue = document.getElementById(colorInputId.toString()).value;
+            dayColors[colorInputId] = newColorValue;
+            // dayColors[inputColors[i].id] = document.getElementById("+[i]+").value;
+        }
+        console.log("day colors object (next line): ");
+        console.log(dayColors);
+
+    }
+
+    function addToLocalStorage() {
+        // stringify the dayColors object
+        // save it to localStorage as window.localStorage.colorData
+    }
 
 }
