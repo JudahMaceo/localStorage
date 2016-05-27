@@ -36,31 +36,37 @@ window.onload = function() {
         event.preventDefault();
         // alert("clicked on submit");
         updateDayColors();
-        setBackgroundColor();
+        setBackgroundColor(dayColors);
         addToLocalStorage();
         return (false);
     })
 
-    function setBackgroundColor() {
+    function setBackgroundColor(colorData) {
         // set the background color to todays color
         // alert("called set colors function");
         var todaysColor = [];
 
-        for (key in dayColors) {
+        for (key in colorData) {
             if (key === today.toString()) {
-                todaysColor.push(dayColors[key])
+                todaysColor.push(colorData[key])
             }
 
         }
         console.log(todaysColor[0]);
-document.body.style.background = todaysColor[0];
+        document.body.style.background = todaysColor[0];
     }
 
 
     function getDayColorsFromLocalStorage() {
         // check if window.localStorage.colorData is not undefined
+        var colorDataString = localStorage.getItem("colorData");
+        console.log("***" + colorDataString);
         // JSON.parse the colorData
+        var parsedColorDataString = JSON.parse(colorDataString);
+        console.log(parsedColorDataString);
         // Updated the background color to todays color using the today as the key
+        setBackgroundColor(parsedColorDataString);
+
     }
 
     function updateDayColors() {
@@ -81,7 +87,12 @@ document.body.style.background = todaysColor[0];
 
     function addToLocalStorage() {
         // stringify the dayColors object
+        var dayColorsString = JSON.stringify(dayColors);
+        console.log(dayColorsString);
         // save it to localStorage as window.localStorage.colorData
+        window.localStorage.setItem('colorData', dayColorsString);
+        // window.localStorage.clear();
+
     }
 
 }
